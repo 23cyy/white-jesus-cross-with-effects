@@ -1,0 +1,97 @@
+html, body {
+    margin: 0; padding: 0; box-sizing: border-box;
+    width: 100%; height: 100%;
+    background: #111; /* Dark background */
+    font-family: sans-serif;
+    overflow: hidden;
+  }
+
+  .scene {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at center, #222 0%, #111 100%);
+  }
+
+  /* The Cross Container */
+  .cross-container {
+    position: relative;
+    width: 200px; height: 200px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* The Cross */
+  .cross {
+    position: relative;
+    width: 50px; height: 50px; /* This is the central overlap area */
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+
+  .cross .vertical, .cross .horizontal {
+    position: absolute;
+    background: linear-gradient( to bottom, #fff 0%, #ccc 100%);
+    box-shadow: 0 0 20px rgba(255,255,255,0.2), 0 0 40px rgba(255,255,255,0.1);
+    border-radius: 5px;
+    transition: box-shadow 0.4s ease, background 0.4s ease;
+  }
+
+  .cross .vertical {
+    width: 30px; height: 400px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .cross .horizontal {
+    width: 200px; height: 30px;
+    top: -100%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Glowing Hover Effect */
+  .cross:hover .vertical, .cross:hover .horizontal {
+    background: linear-gradient( to bottom, #fff 0%, #eee 100%);
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.3),
+      0 0 20px rgba(255,255,255,0.3),
+      0 0 40px rgba(255,255,255,0.2);
+  }
+
+  /* Pulse Effect - hidden by default */
+  .cross .pulse-effect {
+    position: absolute;
+    top: -100%; left: 50%;
+    width: 10px; height: 10px;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 80%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  /* After click, the pulse expands */
+  .cross.clicked .pulse-effect {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(10);
+    -moz-transform: translate(-50%, -50%) scale(10);
+    -ms-transform: translate(-50%, -50%) scale(10);
+    -o-transform: translate(-50%, -50%) scale(10);
+    transform: translate(-50%, -50%) scale(10);
+}
+
+  /* Holy Light - subtle, ambient glow behind the cross */
+  .holy-light {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.5;
+    filter: blur(50px);
+    pointer-events: none;
+  }
+
+  /* Optional subtle hover scaling */
+  .cross:hover {
+    transform: scale(1.05);
+  }
